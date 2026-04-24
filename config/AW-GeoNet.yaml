@@ -1,6 +1,4 @@
-# Geo-YOLO Configuration
-# Based on: Geometry-Aware Computational Reallocation for Efficient Object Detection
-# Model Structure: Backbone(GAMS) + Neck(LAS: DPS-Conv + GPDA at P3/P4)
+
 
 nc: 7  # Pedestrian, Rider, Car, Truck, Bus, Rare, Device
 names: ['pedestrian', 'rider', 'car', 'truck', 'bus', 'rare_vehicle', 'traffic_device']
