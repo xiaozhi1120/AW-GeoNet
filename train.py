@@ -3,29 +3,19 @@ import sys
 import os
 from ultralytics import YOLO
 from ultralytics.nn import tasks
-
-
 sys.path.append(os.getcwd())
 from models.modules import GAMSBlock, GPDA, DPSConv
-
 tasks.GAMSBlock = GAMSBlock
 tasks.GPDA = GPDA
 tasks.DPSConv = DPSConv
-
 warnings.filterwarnings('ignore')
-
-
 def main():
-    # Initialize Model
-    model = YOLO('configs/geo-yolo.yaml')
+    model = model('configs/AW-GeoNet.yaml')
 
-    # Load Pre-trained Weights
     try:
         model.load('yolov8s.pt')
     except Exception:
         pass
-
-    # Start Training (Paper Configuration)
     model.train(
         data='data/data.yaml',
         project='runs/train',
@@ -44,8 +34,6 @@ def main():
         cos_lr=True,
         warmup_epochs=5,
         weight_decay=0.0005,
-
-        # Regularization & Augmentation
         label_smoothing=0.1,
         dropout=0.2,
         mosaic=0.8,
@@ -58,8 +46,6 @@ def main():
         degrees=2.0,
         translate=0.02,
         scale=0.1,
-
-        # System
         amp=True,
         plots=True
     )
